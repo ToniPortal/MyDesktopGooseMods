@@ -17,7 +17,7 @@ function Update()
     end
 
     if Input.Keyboard.GetKeyHeld(shiftKey) and follow then
-        Goose.SetGooseProp("targetPos", {pos[1], pos[2]})
+        -- Goose.SetGooseProp("targetPos", {pos[1], pos[2]})
         follow = false
     end
 
