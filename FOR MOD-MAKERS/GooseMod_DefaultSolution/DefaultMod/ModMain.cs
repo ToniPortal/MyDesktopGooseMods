@@ -18,6 +18,8 @@ namespace DefaultMod
         void IMod.Init()
         {
             // Subscribe to whatever events we want
+            MessageBox.Show("Your mod has been initialized!");
+
             InjectionPoints.PostTickEvent += PostTick;
         }
 

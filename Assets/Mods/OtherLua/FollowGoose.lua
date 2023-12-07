@@ -4,17 +4,16 @@ function Start()
 end
 
 follow = false
-activateKey = "LeftCtrl"
-mKey = "M"
 
-desactivateKey = "RightShift"
 function Update()
     -- Code here is executed every frame.
+    activateKey = "LeftCtrl M" -- "Ctrl+M" to activate
+    deactivateKey = "LeftShift M" -- "Shift+M" to deactivate
 
-    local mpos = Input.Mouse.GetMousePos()
-    local pos = Goose.GetGooseProp("position")
+    mpos = Input.Mouse.GetMousePos()
+    pos = Goose.GetGooseProp("position")
 
-    if Input.Keyboard.GetKeyHeld(activateKey) and Input.Keyboard.GetKeyHeld(mKey) and not follow then
+    if Input.Keyboard.GetKeyHeld(activateKey) and not follow then
         follow = true
         Interface.MessageBox("The Goose Follow your mouse now !\n")
     end
