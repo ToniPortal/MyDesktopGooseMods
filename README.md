@@ -1,5 +1,5 @@
 ![UpOrDown](https://img.shields.io/website-up-down-green-red/http/desktopgooseunofficial.github.io)
-![Watcher](https://img.shields.io/github/watchers/ToniPortal/MyDektopGooseMods?style=social)
+![Watcher](https://img.shields.io/github/watchers/ToniPortal/MyDesktopGooseMods?style=social)
 <h1 align="center"></h1>
 
 <p align="center">I created mod that working with quackLua</p>
