@@ -1,35 +1,93 @@
 function Start()
-    -- Code here is executed once the goose's cage is opened.
+    -- Le code ici est exécuté une fois que la cage de l'oie est ouverte.
     return true
 end
 
-follow = false
-activateKey = "LeftCtrl"
-mKey = "M"
+-- Utiliser la fonction pour obtenir la largeur de l'écran
 
-desactivateKey = "RightShift"
+local revien = false
+local actionExecuted = false
+
+-- Pour la propriété de l'oie :
+-- La première valeur est X
+-- La deuxième valeur est Y
+
 function Update()
-    -- Code here is executed every frame.
+    -- Le code ici est exécuté à chaque image.
 
-    local mpos = Input.Mouse.GetMousePos()
-    local pos = Goose.GetGooseProp("position")
+    pos = Goose.GetGooseProp("targetPos")
+    randomNumber = math.random(1, 2)
 
-    if Input.Keyboard.GetKeyHeld(activateKey) and Input.Keyboard.GetKeyHeld(mKey) and not follow then
-        follow = true
-        Interface.MessageBox("The Goose Follow your mouse now !\n")
+    if pos[1] < 2 and not revien and not actionExecuted then
+        -- Interface.MessageBox("He come back")
+        revien = true
     end
 
-    if Input.Keyboard.GetKeyHeld(desactivateKey) and follow then
-        -- Goose.SetGooseProp("targetPos", {pos[1], pos[2]})
-        follow = false
-        Interface.MessageBox("The Goose not Follow your mouse...\n")
+    if pos[1] > 1900 and not revien and not actionExecuted then
+        -- Interface.MessageBox("He come back")
+        revien = true
     end
 
-    if follow then
-        Goose.SetGooseProp("targetPos", {mpos[1], mpos[2]})
+    if revien then
+        -- Attendre 7 secondes avant de vérifier à nouveau
+        if pos[1] > 200 and pos[2] < 500 and not actionExecuted then
+            -- Interface.MessageBox("Salut")
+            movegoose()
+            actionExecuted = true
+        end
+    end
+
+    if revien then
+        if pos[1] > 1200 and pos[2] < 1900 and not actionExecuted then
+            -- Interface.MessageBox("Salut")
+            movegoose()
+            actionExecuted = true
+        end
+    end
+
+    if revien and actionExecuted then
+        actionExecuted = false
+        revien = false
     end
 
     return true
+end
+
+function movegoose()
+    whero = math.random(1, 4)
+
+    if whero == 1 then
+        -- Viens d'en haut
+        randomX = math.random(20, 1200)
+        randomY = 20
+        Goose.SetGooseProp("direction", 35)
+        Goose.SetGooseProp("targetPos", {randomX, randomY + 250})
+        -- Définir la position de l'oie sur le bord de l'écran
+        Goose.SetGooseProp("position", {randomX, randomY})
+    elseif whero == 2 then
+        -- Viens d'en bas
+        randomX = math.random(20, 1200)
+        randomY = 950
+        Goose.SetGooseProp("direction", 0)
+        Goose.SetGooseProp("targetPos", {randomX, randomY - 300})
+        -- Définir la position de l'oie sur le bord de l'écran
+        Goose.SetGooseProp("position", {randomX, randomY})
+    elseif whero == 3 then
+        -- Viens d'a droite
+        randomX = 1920
+        randomY = math.random(200, 800)
+        Goose.SetGooseProp("targetPos", {randomX - 500, randomY})
+        -- Définir la position de l'oie sur le bord de l'écran
+        Goose.SetGooseProp("position", {randomX, randomY})
+    elseif whero == 4 then
+        randomX = -20
+        randomY = math.random(20, 1200)
+        Goose.SetGooseProp("direction", 90)
+        Goose.SetGooseProp("targetPos", {randomX, randomY - 250})
+        -- Définir la position de l'oie sur le bord de l'écran
+        Goose.SetGooseProp("position", {randomX, randomY})
+    end
+
 end
 
 return true
